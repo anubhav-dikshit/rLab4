@@ -1,0 +1,15 @@
+Package: rLab4
+Version: 0.0.0.9000
+Title: RC Class Linear Regression
+Description: This package is an implementation of linear regression using Reference Class.
+Authors@R: person("Anubhav", "Dikshit", email = "anudi287@student.liu.se", role = c("aut", "cre"))
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+ByteCompile: true
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat
+VignetteBuilder: knitr
+RoxygenNote: 6.1.0
