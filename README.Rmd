@@ -1,6 +1,9 @@
 ---
 output: github_document
 ---
+  [![Travis build status](https://travis-ci.com/anubhav-dikshit/rLab4.svg?branch=master)](https://travis-ci.com/anubhav-dikshit/rLab4)
+  
+  [![Coverage status](https://codecov.io/gh/anubhav-dikshit/rLab4/branch/master/graph/badge.svg)](https://codecov.io/github/anubhav-dikshit/rLab4?branch=master)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
