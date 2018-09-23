@@ -20,7 +20,7 @@
 #' @field standardizedresiduals, standardized residuals
 #' @field sqrtresiduals, the square root of standardizedresiduals
 #' @return empty
-#' @export
+#' @export linreg
 
 linreg <- setRefClass("linreg",
                       fields = list(formula="formula",
