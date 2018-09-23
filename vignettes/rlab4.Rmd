@@ -1,5 +1,5 @@
 ---
-title: "Vignette Title"
+title: "Linear Regression using Reference Class"
 author: "Vignette Author"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
