@@ -56,4 +56,11 @@ Create a linreg object
 \item{\code{sqrtresiduals,}}{the square root of standardizedresiduals}
 }}
 
+\section{Methods}{
+
+\describe{
+\item{\code{print()}}{Prints information about model}
+
+\item{\code{summary()}}{Prints the summary of linear regression model.}
+}}
 

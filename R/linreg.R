@@ -22,7 +22,6 @@
 #' @return empty
 #' @export
 
-# Create class
 linreg <- setRefClass("linreg",
                       fields = list(formula="formula",
                                     data="data.frame",
@@ -43,7 +42,9 @@ linreg <- setRefClass("linreg",
                                     tvalues="matrix",
                                     pvalues= "matrix",
                                     standardizedresiduals ="matrix",
-                                    sqrtstresiduals = "matrix"
+                                    sqrtstresiduals = "matrix",
+                                    export_formula = "formula",
+                                    export_data = "character"
                                     ),
                       methods = list(
                         initialize = function(formula, data){
@@ -70,13 +71,18 @@ linreg <- setRefClass("linreg",
                           # t-values
                           tvalues <<- betaestimates/sqrt(bb)
                           # p-values
-                          pvalues <<- pt(tvalues, df=dof, lower.tail = FALSE)
+                          pvalues <<- 2 * pt(abs(tvalues), dof, lower.tail = FALSE)
                           # Standardized residuals for summary
                           standardizedresiduals <<- residual / sd(residual)
                           sqrtstresiduals <<- sqrt(abs(standardizedresiduals))
+
+                          # saving names
+                          export_formula <<- formula
+                          export_data <<- deparse(substitute(data))
                         },
                         print = function(){
-                          cat(paste("Coeffiencts for linreg(formula = ", format(formula), ", data = ", deparse(substitute(data)), ") :\n\n ", sep = ""))
+                          "Prints information about model"
+                          cat(paste("linreg(formula = ", format(export_formula), ", data = ", export_data , ")\n\n ", sep = ""))
                           setNames(round(betaestimates[1:nrow(betaestimates)],3),rownames(betaestimates))
                         },
                         resid = function(){
@@ -109,10 +115,38 @@ linreg <- setRefClass("linreg",
                           return(plotlist)
                         },
                         summary = function(){
-                          cat(paste("linreg(formula = ", format(formula), ", data = ", deparse(substitute(data)), ") :\n\n ", sep = ""))
-                          cat(paste("degrees of freedom: ", dof, "\n\n", sep = ""))
-                          setNames(
-                            as.data.frame(cbind(betaestimates,as.matrix(sqrt(bb)),tvalues,pvalues)),
-                            c("Coefficients","Standard error","t values", "p values"))
+                          "Prints the summary of linear regression model."
+                          cat(paste("linreg(formula = ", format(export_formula), ", data = ", export_data, ") :\n\n ", sep = ""))
+                          x <- setNames(as.data.frame(cbind(betaestimates,as.matrix(sqrt(bb)),tvalues, formatC(pvalues, format = "e", digits = 2), p_star_cal(pvalues))), c("Coefficients","Standard error","t values", "p values", ""))
+                          myPrint(x)
+                          cat(paste("\n\nResidual standard error: ", residualstd, " on ", dof, " degrees of freedom: ", sep = ""))
                         }
                       ))
+
+#' myPrint (custom print)
+#'
+#' Prints. This class can be used to print inside RC classes, which is not possible otherwise.
+#'
+#' @param x object
+#' @param stripoff column names will be stripped off.
+#'
+#' @return Nothing.
+myPrint = function(x, stripoff = FALSE) {
+    print(x)
+}
+
+#' p_star_cal
+#'
+#' Returns * based on p value
+#'
+#' @param p_value the p_value.
+#'
+#' @return Returns: Signif. codes:  0 "***" 0.001 "**" 0.01 "*" 0.05 "." 0.1 " " 1
+#'
+p_star_cal = function(p_value) {
+  x <- ifelse(p_value > 0.1, " ",
+              (ifelse(p_value > 0.05, " . ",
+                      (ifelse(p_value > 0.01, "*",
+                              (ifelse(p_value > 0.001, "**","***")))))))
+  return(x)
+}
