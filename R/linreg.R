@@ -99,15 +99,12 @@ linreg <- setRefClass("linreg",
                         },
                         plot = function(){
                           plot1 <- ggplot(data.frame(yfit, residual), aes(y=residual, x=yfit)) + geom_point(shape=21, size=3, colour="black", fill="white")
-                          plot1 <- plot1 + theme_linedraw() + theme(panel.grid.major = element_blank(),
-                                                                            panel.grid.minor = element_blank(),
-                                                                            plot.title = element_text(hjust = 0.5))
+                          plot1 <- plot1 + theme_liu()
+
                           plot1 <- plot1 + stat_summary(fun.y=median, colour="red", geom="line", aes(group = 1))
                           plot1 <- plot1 + ggtitle("Residuals vs fitted") + xlab(paste("Fitted values \n lm(Petal.Length ~ Species)"))
                           plot2 <- ggplot(data.frame(yfit, sqrtstresiduals), aes(y=sqrtstresiduals, x=yfit)) + geom_point(alpha = 0.6, shape=21, size=3, colour="black", fill="white")
-                          plot2 <- plot2 + theme_linedraw() + theme(panel.grid.major = element_blank(),
-                                                                                 panel.grid.minor = element_blank(),
-                                                                                 plot.title = element_text(hjust = 0.5))
+                          plot2 <- plot2 + + theme_liu()
                           plot2 <- plot2 + stat_summary(fun.y=median, colour="red", geom="line", aes(group = 1))
                           plot2 <- plot2 + ggtitle("Scale-Location") + xlab(paste("Fitted values \n lm(Petal.Length ~ Species)"))
                           plot2 <- plot2 + scale_x_continuous(breaks = seq(0.0, 1.5, by= 0.5))

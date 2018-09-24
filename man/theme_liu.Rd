@@ -4,7 +4,7 @@
 \alias{theme_liu}
 \title{Title This is the theme for ggplot2 using Linkoping University colors}
 \usage{
-theme_liu(base_size = 12, base_family = "")
+theme_liu(base_size = 11, base_family = "")
 }
 \arguments{
 \item{base_size}{base parameters}
