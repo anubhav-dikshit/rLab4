@@ -102,7 +102,7 @@ linreg <- setRefClass("linreg",
                                                                             panel.grid.minor = element_blank(),
                                                                             plot.title = element_text(hjust = 0.5))
                           plot1 <- plot1 + stat_summary(fun.y=median, colour="red", geom="line", aes(group = 1))
-                          plot1 <- plot1 + ggtitle("Residuals vs fitted") + xlab(paste("Fitted values \n lm(Petal.Length ~ Species)"))
+                          plot1 <- plot1 + ggtitle("Residuals vs fitted") + xlab(paste("Fitted values \n lm(Petal.Length ~ Species)")) + theme_liu
                           plot2 <- ggplot(data.frame(yfit, sqrtstresiduals), aes(y=sqrtstresiduals, x=yfit)) + geom_point(alpha = 0.6, shape=21, size=3, colour="black", fill="white")
                           plot2 <- plot2 + theme_linedraw() + theme(panel.grid.major = element_blank(),
                                                                                  panel.grid.minor = element_blank(),

@@ -17,3 +17,8 @@ None
 \description{
 Title This is the theme for ggplot2 using Linkoping University colors
 }
+\examples{
+ggplot2::ggplot(mtcars, ggplot2::aes(wt, mpg, color = cyl)) +
+ggplot2::geom_point() + ggplot2::geom_smooth(method = "lm", formula = y~x) +
+ggplot2::labs(title = "Regression of MPG on Weight", x = "Weight", y = "Miles per Gallon")
+}

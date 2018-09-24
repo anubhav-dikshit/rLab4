@@ -6,9 +6,11 @@
 #' @return None
 #' @export theme_liu
 #'
-#' @import ggplot2
+#' @importFrom ggplot2 ggplot aes geom_point geom_smooth labs
 #'
-#'
+#' @examples ggplot2::ggplot(mtcars, ggplot2::aes(wt, mpg, color = cyl)) +
+#' ggplot2::geom_point() + ggplot2::geom_smooth(method = "lm", formula = y~x) +
+#' ggplot2::labs(title = "Regression of MPG on Weight", x = "Weight", y = "Miles per Gallon")
 
 theme_liu <- function (base_size = 12, base_family = "")
 {
